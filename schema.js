@@ -7,9 +7,19 @@ const PersonType = new GraphQLObjectType({
         id: {type: GraphQLString},
         name: {type: GraphQLString},
         email: {type: GraphQLString},
-        age: {type: GraphQLInt}
+        age: {type: GraphQLInt},
+        bag: {
+            type: new GraphQLList(ItemType)
+        }
     })
 });
+
+const ItemType = new GraphQLObjectType({
+    name: 'Item',
+    fields: () => ({
+        name: {type: GraphQLString},
+    })
+})
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
