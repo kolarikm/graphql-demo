@@ -34,6 +34,52 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
+const modify = new GraphQLObjectType({
+    name: 'Modify',
+    fields: {
+        addPerson: {
+            type: PersonType,
+            args: {
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                email: {type: new GraphQLNonNull(GraphQLString)},
+                age: {type: new GraphQLNonNull(GraphQLInt)}
+            },
+            resolve(parent, args) {
+                return axios.post(`http://localhost:3000/people`, {
+                    name: args.name,
+                    email: args.email,
+                    age: args.age
+                })
+                    .then(res => res.data);
+            }
+        },
+        removePerson: {
+            type: PersonType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve(parent, args) {
+                return axios.delete(`http://localhost:3000/people/${args.id}`)
+                    .then(res => res.data);
+            }
+        },
+        editPerson: {
+            type: PersonType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLString)},
+                name: {type: GraphQLString},
+                email: {type: GraphQLString},
+                age: {type: GraphQLInt}
+            },
+            resolve(parent, args) {
+                return axios.patch(`http://localhost:3000/people/${args.id}`, args)
+                    .then(res => res.data);
+            }
+        }
+    }
+})
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: modify
 });
