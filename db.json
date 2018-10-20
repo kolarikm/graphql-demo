@@ -1,0 +1,28 @@
+ {
+     "people": [
+         {
+             "id": "1",
+             "name": "Bilbo Baggins",
+             "email": "bbaggins@shire.net",
+             "age": 111
+         },
+         {
+            "id": "2",
+            "name": "Frodo Baggins",
+            "email": "yo_frodo@shire.net",
+            "age": 33
+        },
+        {
+            "id": "3",
+            "name": "Gandalf the Gray",
+            "email": "thegrayone@middleearth.com",
+            "age": 2019
+        },
+        {
+            "id": "4",
+            "name": "Aragorn",
+            "email": "thetrueking@middleearth.com",
+            "age": 87
+        }
+     ]
+ }
